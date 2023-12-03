@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 
+#include "./Include/Nomes.h"
 #include "./Include/Menu.h"
 #include "./Include/Binario.h"
 
@@ -25,10 +26,13 @@ int Menu::confirmaSaida(){
     return opcaoSaida;
 }
 
-Menu::Menu(){
-    Binario binario(NOME_ARQ_BINARIO);
+Menu::Menu() : binario(NOME_ARQ_BINARIO){
 }
-dsadas
+
+Menu::~Menu(){
+
+}
+
 int Menu::opcaoExporta(){
     int opcaoExporta;
     cout << "Voce deseja exportar os arquivos em .csv ou .bin?" << endl;
@@ -36,29 +40,47 @@ int Menu::opcaoExporta(){
     return opcaoExporta;
 }
 
+int Menu::opcaoImprime(){
+    cout << "Selecione a opcao que deseja imprimir: " << endl;
+    cout << "(1)Intervalo (2)Arquivo todo" << endl;
+
+    int opcao;
+    cin >> opcao;
+
+    return opcao;
+}
+
+void Menu::impressaoArquivo(int opcaoImpressao){
+    (opcaoImpressao==1) ? binario.imprimeIntervalo() : binario.imprimeTudo();
+}
+
+void Menu::retornarMenu(){
+
+}
+
 void Menu::executaMenu(){
     int opcao;
-    imprimeMenu();
     do{
+        imprimeMenu();
+        cin >> opcao;
         switch (opcao){
 
             case 1:
                 binario.ordenar();
                 break;
             case 2:
-                int posicao;
-                cin >> posicao;
-                binario.remover(posicao);
+                int posicaoR;
+                cin >> posicaoR;
+                binario.remover(posicaoR);
                 break;
             case 3:
-                int posicao;
-                cin >> posicao;
-                binario.adicionar(posicao);
+                int posicaoA;
+                cin >> posicaoA;
+                binario.adicionar(posicaoA);
                 break;
             case 4:
-                opcaoImprime(); 
-                int opImp;
-                cin >> opImp;
+                int opImp = opcaoImprime();
+
                 impressaoArquivo(opImp);
                 break;
             case 5:
@@ -72,14 +94,6 @@ void Menu::executaMenu(){
                 cout << "Opcao invalida" << endl;
         }
     } while(opcao != 6);
-}
-
-void Menu::impressaoArquivo(int opcaoImpressao){
-    (opcaoImpressao==1) ? binario.imprimeIntervalo() : binario.imprimeTudo();
-}
-
-void Menu::retornarMenu(){
-
 }
 
 /*int Menu::confirmaRemocao(Binario removido){

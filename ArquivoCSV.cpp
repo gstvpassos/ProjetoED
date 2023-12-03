@@ -1,8 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "./Include/Nomes.h"
 #include "./Include/ArquivoCSV.h"
+
+using namespace std;
+
+ArquivoCSV::ArquivoCSV(string nomeArq) : nomeArq(nomeArq){
+    if(existe()) abrir();
+}
 
 string ArquivoCSV::getNomeArq(){
     return nomeArq;
@@ -21,7 +26,11 @@ long int ArquivoCSV::getTamanho(){
 }
 
 bool ArquivoCSV::existe(){
+    ifstream arqTeste(getNomeArq());
+    bool existe = arqTeste.good();
+    arqTeste.close();
 
+    return existe;
 }
 
 inline void ArquivoCSV::abrir(){

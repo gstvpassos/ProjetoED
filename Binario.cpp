@@ -1,23 +1,31 @@
 #include <iostream>
 #include <fstream>
 
-#include "./Include/Nomes.h"
 #include "./Include/Binario.h"
 #include "./Include/ArquivoCSV.h"
 
 using namespace std;
 
-Binario::Binario(string nomeArq){
-    nomeBinario = nomeArq;
-    ArquivoCSV arqCSV;
+Binario::Binario(string nomeArqBin) : nomeBinario(nomeArqBin){
+    ifstream arqBin(getNomeBinario());
 }
 
 Binario::~Binario(){
-    arqCSV.fechar();
+    arqBin.close();
 }
 
-void Binario::csvToBin(){
+void Binario::csvToBin(string nomeCSV){
+    ifstream arquivoCSV(nomeCSV);
 
+    if(!arquivoCSV.good()){
+        cerr << "Base de dados " << nomeCSV << " nao encontrada!" << endl;
+        cerr << "Certifique-se que ela esta baixada na pasta" << endl;
+    }
+    
+}
+
+string Binario::getNomeBinario(){
+    return nomeBinario;
 }
 
 Produto Binario::binToCsv(){

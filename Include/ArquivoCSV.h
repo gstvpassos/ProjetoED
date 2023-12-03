@@ -1,27 +1,29 @@
+#ifndef ARQUIVOCSV_H
+#define ARQUIVOCSV_H
+
 #include <iostream>
 #include <fstream>
-
 #include "Nomes.h"
 
-using namespace std;
+class ArquivoCSV {
 
-class ArquivoCSV{
-    private:
-    int posicao;
-    bool ehValido;
-    long int tamanho;
-
-    public:
+public:
+    ArquivoCSV(string nomeArq);
     string getNomeArq();
     int getPosicao();
     bool isValid();
     long int getTamanho();
-    inline bool existe();
-    inline void abrir();
-    inline bool estaAberto();
-    inline void fechar();
+    bool existe();
+    void abrir();
+    bool estaAberto();
+    void fechar();
 
-    protected:
+protected:
     string nomeArq;
     fstream arqCSV;
+    int posicao;
+    bool ehValido;
+    long int tamanho;
 };
+
+#endif // ARQUIVOCSV_H

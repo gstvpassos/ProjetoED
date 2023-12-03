@@ -1,6 +1,8 @@
 #include "./Nomes.h"
 #include "./Binario.h"
 
+#ifndef MENU_H
+#define MENU_H
 class Menu {
 
     private:
@@ -19,3 +21,5 @@ class Menu {
     //int inline confirmaRemocao(Binario itemRemovido);
 
 };
+
+#endif

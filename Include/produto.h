@@ -3,7 +3,9 @@
 #include "./Nomes.h"
 #include "ArquivoCSV.h"
 
-struct item{
+#ifndef PRODUTO_H
+#define PRODUTO_H
+struct itens{
 
     int tempo_referencia;
     string conta;
@@ -17,12 +19,12 @@ struct item{
 class Produto: public ArquivoCSV{
 
     private:
-    item produto;
+    itens item;
 
     public:
-    Produto(string NOME_ARQ_CSV);
+    Produto(string nomeArq, fstream arq);
     ~Produto();
-    //item getItem();
-
+    string toString() const;
 };
 
+#endif

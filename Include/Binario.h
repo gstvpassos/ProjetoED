@@ -1,19 +1,23 @@
-#include "./Nomes.h"
-#include "./ArquivoCSV.h"
-#include "./produto.h"
+#ifndef BINARIO_H
+#define BINARIO_H
 
-class Binario{
+#include <fstream>
 
-    private:
-    ArquivoCSV arqCSV;
+#include "ArquivoCSV.h"
+#include "produto.h"
+
+class Binario {
+private:
+    fstream arqBin;
     string nomeBinario;
 
-    public:
-    Binario(string nomeArq);
+public:
+    Binario(string nomeArqBin);
     ~Binario();
-    inline void csvToBin();
-    inline Produto binToCsv();
-    int inline busca();
+    void csvToBin(string nomeCSV);
+    Produto binToCsv();
+    int busca();
+    string getNomeBinario();
     void exportarCSV();
     void exportarBin();
     Produto itemRemover(int posicao);
@@ -25,3 +29,5 @@ class Binario{
     void ordenar();
     void alterar();
 };
+
+#endif // BINARIO_H
