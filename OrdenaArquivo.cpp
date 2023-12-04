@@ -18,12 +18,12 @@ void OrdenaArquivo::mergeSortExterno(const string& nome)
 
 int OrdenaArquivo::criaArquivosOrdenados(const string& nome)
 {
-    item V[limiteMaxItens];
+    itens V[limiteMaxItens];
     int cont = 0, total = 0;
 
     char novo[20];
     ifstream f(nome, ios::binary);
-    while (f.read(reinterpret_cast<char*>(&V[total]),sizeof(item)))
+    while (f.read(reinterpret_cast<char*>(&V[total]),sizeof(itens)))
     {
         total++;
         if(total == limiteMaxItens)
@@ -45,12 +45,12 @@ int OrdenaArquivo::criaArquivosOrdenados(const string& nome)
     return cont;
 }
 
-void OrdenaArquivo::salvaArquivo(const string& nome, item *vetItens, int tam, int mudaLinhaFinal)
+void OrdenaArquivo::salvaArquivo(const string& nome, itens *vetItens, int tam, int mudaLinhaFinal)
 {
     ofstream fileDeEscrita(nome, ios::app | ios::binary);
     for (int i = 0; i < tam - 1; ++i)
     {
-        fileDeEscrita.write(reinterpret_cast<const char*>(&vetItens[i]), sizeof(item));
+        fileDeEscrita.write(reinterpret_cast<const char*>(&vetItens[i]), sizeof(itens));
     }
     //Testar quando tiver copilado - VERIFICAR NA VÍDEO AULA
     if (mudaLinhaFinal == 0)
@@ -64,7 +64,7 @@ void OrdenaArquivo::salvaArquivo(const string& nome, item *vetItens, int tam, in
 void OrdenaArquivo::merge(const string& nome, int numArqs, int k)
 {
     char novo[20];
-    item *buffer = new item[k];
+    itens *buffer = new itens[k];
     Arquivo* arq = new Arquivo[numArqs];
 
     for (int i = 0; i < numArqs; ++i)
@@ -75,7 +75,7 @@ void OrdenaArquivo::merge(const string& nome, int numArqs, int k)
         preencheBuffer(&arq[i], k);
     }
 
-    item menor;
+    itens menor;
     int qtdBuffer = 0;
     while (procuraMenor(arq, numArqs, k, &menor) == 1)
     {
@@ -100,7 +100,7 @@ void OrdenaArquivo::merge(const string& nome, int numArqs, int k)
     delete[] arq;
 }
 
-int OrdenaArquivo::procuraMenor(Arquivo* arq, int numArqs, int k, item* menor) {
+int OrdenaArquivo::procuraMenor(Arquivo* arq, int numArqs, int k, itens* menor) {
     int idx = -1;
     for (int i = 0; i < numArqs; i++)
     {
@@ -145,7 +145,7 @@ void OrdenaArquivo::preencheBuffer(Arquivo* arq, int k)
     bool naoPreenchido = true;
     while(i<k and naoPreenchido)
     {
-        if(arq->file.read(reinterpret_cast<char*>(&arq->buffer[arq->MAX]), sizeof(item)))
+        if(arq->file.read(reinterpret_cast<char*>(&arq->buffer[arq->MAX]), sizeof(itens)))
         {
             arq->MAX++;
         }
@@ -160,7 +160,7 @@ void OrdenaArquivo::preencheBuffer(Arquivo* arq, int k)
 }
 
 //Comparador para o método sort
-bool OrdenaArquivo::comparador(const item &item1, const item &item2)
+bool OrdenaArquivo::comparador(const itens &item1, const itens &item2)
 {
     if(item1.tipo_produto > item2.tipo_produto)
     {
