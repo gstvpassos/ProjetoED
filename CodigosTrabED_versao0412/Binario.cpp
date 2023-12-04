@@ -3,26 +3,62 @@
 
 #include "./Include/Binario.hpp"
 
-void Binario::csvToBin(string nomeCSV){
-    ifstream arquivoCSV(nomeCSV);
+void Binario::csvToBin(const vector<itens>& item, const string& filename){
+    ofstream file(filename, ios::binary);
 
-    if(!arquivoCSV.good()){
-        cerr << "Base de dados " << nomeCSV << " nao encontrada!" << endl;
-        cerr << "Certifique-se que ela esta baixada na pasta" << endl;
+    for (const auto& p : item) {
+        file.write(reinterpret_cast<const char*>(&p), sizeof(item));
     }
 
-    arquivoBinario.open(nomeBinario, ios::out | ios::binary);
-    arquivoBinario.seekp(0, ios::end);
+    file.close();
 }
 
-ArquivoCSV Binario::binToCsv()
+fstream Binario::binToCsv()
 {
-    ArquivoCSV umProduto("nomeTeste");
-    return umProduto;
+    fstream arquivoConvertidoCSV(NOME_ARQ_SAIDA_CSV);
+    return arquivoConvertidoCSV;
 }
 
-void Binario::exportarCSV(){
+int Binario::quantidadeItens(){
+    int qtd;
+    if(arquivoBinario.is_open())
+    {
+        streampos posInicial = arquivoBinario.tellg(); //Verifica localização do ponteiro inicialmente
+        arquivoBinario.seekg(ios::end); //Coloca o vetor no final do arquivo
+        qtd = arquivoBinario.tellg() / sizeof(itens); //Pega o tamanho total do arquivo e divide pelo tamanho de itens
 
+        arquivoBinario.seekg(posInicial);
+    }
+    else 
+    {
+        arquivoBinario.open(nomeBinario, ios::binary |ios::in |ios::out);
+        streampos posInicial = arquivoBinario.tellg(); //Verifica localização do ponteiro inicialmente
+        arquivoBinario.seekg(ios::end); //Coloca o vetor no final do arquivo
+        qtd = arquivoBinario.tellg() / sizeof(itens); //Pega o tamanho total do arquivo e divide pelo tamanho de itens
+    }
+}
+
+void Binario::exportarCSV(string nomeArquivoSaidaCSV) {
+    arquivoBinario.open(this->nomeBinario, ios::binary | ios::in | ios::out);
+
+    ofstream arqCSV(nomeArquivoSaidaCSV);
+    // Inserindo o cabeçalho
+    arqCSV << "Tempo_referencia;Conta;Code;Codigo_pais;Tipo_produto;Valor;Status" << endl;
+
+    int quantItens = this->quantidadeItens();
+    itens itemAux;
+
+    for (int i = 0; i < quantItens; i++) {
+        this->arqCSV.seekg(i * sizeof(itens));
+        this->arqCSV.ler(reinterpret_cast<char *>(&itemAux), sizeof(itens));
+
+        if (this->arqCSV.isValid()) {
+            arqCSV << itemAux.tempo_referencia << ";" << itemAux.conta << ";"
+                   << itemAux.code << ";" << itemAux.codigo_pais << ";"
+                   << itemAux.tipo_produto << ";" << itemAux.valor << ";"
+                   << itemAux.status << endl;
+        }
+    }
 }
 
 void Binario::exportarBin(){

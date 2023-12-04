@@ -1,4 +1,5 @@
 #include <fstream>
+#include <vector>
 
 #include "ArquivoCSV.h"
 
@@ -24,6 +25,8 @@ class Produto: public ArquivoCSV{
     Produto(string nomeArq);
     ~Produto();
     string toString() const;
+    vector<itens> converte(fstream &csv_file);
+    vector<string> split(const string& s, char delimiter);
 };
 
 #endif

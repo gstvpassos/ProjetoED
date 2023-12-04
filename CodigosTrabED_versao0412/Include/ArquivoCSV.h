@@ -10,6 +10,7 @@ class ArquivoCSV {
 
 public:
     ArquivoCSV(string nomeArq);
+    ~ArquivoCSV();
     string getNomeArq();
     int getPosicao();
     bool isValid();
@@ -18,6 +19,12 @@ public:
     void abrir();
     bool estaAberto();
     void fechar();
+    void seekp(int pos);
+    void seekg(int pos);
+    void ler(string& linha);
+    void ler(char* buffer, int tamanho);
+    virtual string toString() const;
+    fstream getArqCSV();
 
 protected:
     string nomeArq;

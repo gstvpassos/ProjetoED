@@ -1,6 +1,11 @@
+#include <iostream>
+#include <fstream>
+
 #include "./Nomes.h"
 #include "./ArquivoCSV.h"
 #include "./OrdenaArquivo.h"
+
+using namespace std;
 
 class Binario{
 
@@ -11,9 +16,9 @@ class Binario{
         OrdenaArquivo ordena;
 
     public:
-        inline void csvToBin(string nomeArqCsv);
-        inline ArquivoCSV binToCsv();
-        void exportarCSV();
+        inline void csvToBin(const vector<itens>& item, const string& filename);
+        inline fstream binToCsv();
+        void exportarCSV(string nomeSaidaCSV);
         void exportarBin();
         void remover(int posicao);
         void adicionar(int posicao);
@@ -22,6 +27,7 @@ class Binario{
         void trocarPosicoes(int pos1, int pos2);
         void ordenar();
         void alterar(int posicao);
+        int quantidadeItens();
 
         Binario(string nomeArqBin):arqCSV(NOME_ARQ_CSV)
         {
