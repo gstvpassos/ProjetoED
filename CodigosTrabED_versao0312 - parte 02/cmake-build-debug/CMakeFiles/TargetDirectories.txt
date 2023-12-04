@@ -1,3 +1,0 @@
-C:/Users/Jonatha/Documents/MEGA/UFLA VII/GAC108-ED/TrabalhoED/Codigos/CodigosGustavo/cmake-build-debug/CMakeFiles/CodigosGustavo.dir
-C:/Users/Jonatha/Documents/MEGA/UFLA VII/GAC108-ED/TrabalhoED/Codigos/CodigosGustavo/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Jonatha/Documents/MEGA/UFLA VII/GAC108-ED/TrabalhoED/Codigos/CodigosGustavo/cmake-build-debug/CMakeFiles/rebuild_cache.dir

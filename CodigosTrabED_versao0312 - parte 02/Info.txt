@@ -1,1 +1,0 @@
-Grupo 15 (Gustavo Rocha Passos e Jonatha Levi Dos Santos Lustosa) international-trade-june-2022-quarter-csv.7z, Atributos: product_tipe (primário), value (secundário), ordenação decrescente
