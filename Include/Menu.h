@@ -1,5 +1,4 @@
-#include "./Nomes.h"
-#include "./Binario.h"
+#include "./Binario.hpp"
 
 #ifndef MENU_H
 #define MENU_H

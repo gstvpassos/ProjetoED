@@ -3,7 +3,7 @@
 
 #include "./Include/Nomes.h"
 #include "./Include/Menu.h"
-#include "./Include/Binario.h"
+#include "./Include/Binario.hpp"
 
 using namespace std;
 

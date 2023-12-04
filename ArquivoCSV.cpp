@@ -18,7 +18,7 @@ int ArquivoCSV::getPosicao(){
 }
 
 bool ArquivoCSV::isValid(){
-    
+    return arqCSV.good();
 }
 
 long int ArquivoCSV::getTamanho(){

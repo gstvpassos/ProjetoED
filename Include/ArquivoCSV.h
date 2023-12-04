@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include "Nomes.h"
 
 class ArquivoCSV {
 

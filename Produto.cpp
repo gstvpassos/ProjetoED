@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 #include "./Include/produto.h"
 #include "./Include/ArquivoCSV.h"
 
 using namespace std;
 
-Produto::Produto(string nomeArqCSV, fstream arq) : ArquivoCSV(nomeArqCSV){
+Produto::Produto(string nomeArqCSV) : ArquivoCSV(nomeArqCSV){
 }   
 
 Produto::~Produto(){

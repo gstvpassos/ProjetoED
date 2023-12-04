@@ -1,6 +1,5 @@
 #include <fstream>
 
-#include "./Nomes.h"
 #include "ArquivoCSV.h"
 
 #ifndef PRODUTO_H
@@ -22,7 +21,7 @@ class Produto: public ArquivoCSV{
     itens item;
 
     public:
-    Produto(string nomeArq, fstream arq);
+    Produto(string nomeArq);
     ~Produto();
     string toString() const;
 };
